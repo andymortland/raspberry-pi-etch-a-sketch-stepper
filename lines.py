@@ -124,22 +124,36 @@ def lineTo(x, y):
         # print "  next coords: (%d, %d)" % (point[0], point[1]) 
         stepToPoint(point)
 
+def boxed_star(size):
+    global CURRENT_X, CURRENT_Y
+
+    start_x = CURRENT_X
+    star_start_y = CURRENT_Y
+
+    lineTo(start_x + size, start_y)
+    lineTo(start_x + size, start_y + size)
+    lineTo(start_x, start_y + size)
+    lineTo(start_x, start_y)
+    star(size)
+
 def star(magnitude):
     global CURRENT_X, CURRENT_Y
 
     oneThird = (magnitude / 3)
-    oneSixth = (magnitude / 3)
+    oneSixth = (magnitude / 6)
     twoThirds = ((2*magnitude) / 3)
     fiveSixths = magnitude - oneSixth
     half = (magnitude / 2)
-
-    # get to a nice starting point
-    # lineTo(CURRENT_X + oneSixth, CURRENT_Y)
 
     star_start_x = CURRENT_X
     star_start_y = CURRENT_Y
 
     print "----------------- START STAR -----------------"
+    printCurrentCoords()
+
+    # get to a nice starting point
+    lineTo(star_start_x + oneSixth, star_start_y)
+    print "----------------- ADVANCE TO STAR START -----------------"
     printCurrentCoords()
 
     # up
@@ -164,7 +178,7 @@ def star(magnitude):
 
     # return to start
     print "----------------- BACK -----------------"
-    lineTo(star_start_x, star_start_y)
+    lineTo(star_start_x + oneSixth, star_start_y)
     printCurrentCoords()
 
 
